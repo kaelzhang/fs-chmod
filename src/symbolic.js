@@ -25,7 +25,7 @@ const OPERATORS = {
 }
 
 const REFERENCE_TYPES = [
-  'user',
+  'owner',
   'group',
   'others'
 ]
@@ -48,19 +48,19 @@ const MODE_PRESETS = {
   },
   s: {
     mutator (Mode, operator) {
-      if (Mode.user) {
-        Mode.setuid = operator === MINUS
+      if (Mode.owner) {
+        Mode.setuid = operator !== MINUS
       }
 
       if (Mode.group) {
-        Mode.setgid = operator === MINUS
+        Mode.setgid = operator !== MINUS
       }
     }
   },
   t: {
     group: 2,
     mutator (Mode, operator) {
-      Mode.sticky = operator === MINUS
+      Mode.sticky = operator !== MINUS
     }
   }
 }
@@ -69,7 +69,7 @@ const createAddRef = type => Mode => {
   Mode[type] = Object.create(null)
 }
 
-const u = createAddRef('user')
+const u = createAddRef('owner')
 const g = createAddRef('group')
 const o = createAddRef('others')
 
@@ -156,6 +156,8 @@ const parse = symbolic => {
 
     OPERATORS[operator](permission, keys, NORMAL_MODE_TYPES)
   })
+
+  return Mode
 }
 
 module.exports = parse

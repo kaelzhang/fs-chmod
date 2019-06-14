@@ -17,6 +17,9 @@
 
 A drop in replacement of [`fs.chmod`](chmod) with `+x` support.
 
+- supports **finer-grained [symbolic modes](symbolic)**, such as `+x`, `ug+rw`, and etc.
+- supports **mode object** to make the mode better described.
+
 ## Install
 
 ```sh
@@ -28,7 +31,8 @@ $ npm i fs-chmod
 ```js
 const {
   chmod,
-  chmodSync
+  chmodSync,
+  parse
 } = require('fs-chmod')
 
 chmod('/path/to/file.js', '+x').then(() => {
@@ -43,10 +47,24 @@ chmodSync.sync('/path/to/file.js', 'a+x')
 ### chmodSync(path, mode): void
 
 - **path** `string | Buffer | URL` the same as vanilla [`fs.chmod`](chmod)
-- **mode** `integer | object | string`
+- **mode** `integer | Mode | string`
 - **callback** `Function(error?)`
 
 Changes the permissions of a file.
+
+### parse(str): Mode
+
+- **str** `string` Symbolic notation string of file system permissions
+
+Parses the symbolic notation string, such as `+x`, `ug+rwx` into an object of the interface `Mode`(see below)
+
+```js
+const mode = parse('u+x')
+
+console.log(mode.owner.execute)  // true
+console.log(mode.owner.read)     // false
+console.log(mode.group)         // undefined
+```
 
 ## mode
 
@@ -67,8 +85,13 @@ interface Mode {
   owner?: Permission
   group?: Permission
   others?: Permission
+  setuid?: boolean
+  setgid?: boolean
+  sticky?: boolean
 }
 ```
+
+For details, see [Symbolic modes](symbolic)
 
 ### mode `string`
 
@@ -89,3 +112,4 @@ interface Mode {
 [MIT](LICENSE)
 
 [chmod]: https://nodejs.org/dist/latest/docs/api/fs.html#fs_fs_chmod_path_mode_callback
+[symbolic]: https://en.wikipedia.org/wiki/Chmod#Symbolic_modes
