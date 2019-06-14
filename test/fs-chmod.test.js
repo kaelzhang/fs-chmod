@@ -41,21 +41,21 @@ const prepare = async mode => {
 
 const CASES = [
   [
-    '777', '-x', (t, mode) => {
+    0o777, '-x', (t, mode) => {
       t.is(mode.owner.execute, false)
       t.is(mode.group.execute, false)
       t.is(mode.others.execute, false)
     }
   ],
   [
-    '777', 775, (t, mode) => {
+    0o777, 0o775, (t, mode) => {
       t.is(mode.others.read, true)
       t.is(mode.others.write, false)
       t.is(mode.others.execute, true)
     }
   ],
   [
-    '777', {
+    0o777, {
       owner: {
         execute: false
       }
@@ -64,7 +64,7 @@ const CASES = [
     }
   ],
   [
-    '777', 'ug+s', (t, mode) => {
+    0o777, 'ug+s', (t, mode) => {
       t.is(mode.setuid, true)
       t.is(mode.setgid, true)
     }

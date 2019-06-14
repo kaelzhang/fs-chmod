@@ -1,6 +1,6 @@
 {
   "name": "fs-chmod",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A drop-in replacement of fs.chmod with `+x` support ",
   "main": "src/index.js",
   "scripts": {

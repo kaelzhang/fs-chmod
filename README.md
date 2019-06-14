@@ -70,7 +70,14 @@ console.log(mode.group)         // undefined
 
 ### mode `integer`
 
-The same as the the second parameter of vanilla [`fs.chmod`](chmod)
+The same as the the second parameter of vanilla [`fs.chmod`](chmod).
+
+**PAY ATTENTION** that `mode` should be an **octal** number.
+
+```js
+chmodSync('/path/to/file', 0o777)  // ✅ Correct~
+chmodSync('/path/to/file', 777)    // ❌ WRONG!
+```
 
 ### mode `object<Mode>`
 
