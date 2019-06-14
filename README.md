@@ -15,7 +15,7 @@
 
 # fs-chmod
 
-A drop in replacement of [`fs.chmod`](chmod) with `+x` support.
+A drop-in replacement of [`fs.chmod`](chmod) with `+x` support.
 
 - supports **finer-grained [symbolic modes](symbolic)**, such as `+x`, `ug+rw`, and etc.
 - supports **mode object** to make the mode better described.

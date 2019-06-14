@@ -1,7 +1,7 @@
 {
   "name": "fs-chmod",
-  "version": "1.0.2",
-  "description": "A drop in replacement of fs.chmod with `+x` support ",
+  "version": "1.0.3",
+  "description": "A drop-in replacement of fs.chmod with `+x` support ",
   "main": "src/index.js",
   "scripts": {
     "test": "NODE_DEBUG=fs-chmod nyc ava --timeout=10s --verbose",
