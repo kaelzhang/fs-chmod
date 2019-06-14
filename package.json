@@ -1,0 +1,53 @@
+{
+  "name": "fs-chmod",
+  "version": "1.0.0",
+  "description": "A drop in replacement of fs.chmod with `+x` support ",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "NODE_DEBUG=fs-chmod nyc ava --timeout=10s --verbose",
+    "test:dev": "NODE_DEBUG=fs-chmod nyc ava --timeout=10s --verbose && npm run report:dev",
+    "lint": "eslint .",
+    "fix": "eslint . --fix",
+    "posttest": "npm run report",
+    "report": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "report:dev": "nyc report --reporter=html && npm run report:open",
+    "report:open": "open coverage/index.html"
+  },
+  "files": [
+    "src/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kaelzhang/fs-chmod.git"
+  },
+  "keywords": [
+    "fs-chmod"
+  ],
+  "engines": {
+    "node": ">= 6"
+  },
+  "ava": {
+    "babel": false,
+    "files": [
+      "test/*.test.js"
+    ]
+  },
+  "author": "kaelzhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kaelzhang/fs-chmod/issues"
+  },
+  "devDependencies": {
+    "@ostai/eslint-config": "^3.1.0",
+    "ava": "^1.4.1",
+    "codecov": "^3.4.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.17.2",
+    "nyc": "^14.1.1"
+  },
+  "dependencies": {
+    "core-util-is": "^1.0.2",
+    "mz": "^2.7.0",
+    "stat-mode": "^0.3.0"
+  }
+}
