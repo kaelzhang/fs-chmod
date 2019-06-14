@@ -15,9 +15,9 @@
 
 # fs-chmod
 
-A drop-in replacement of [`fs.chmod`](1) with `+x` support.
+A drop-in replacement of [`fs.chmod`][chmod] with `+x` support.
 
-- supports **finer-grained [symbolic modes](2)**, such as `+x`, `ug+rw`, and etc.
+- supports **finer-grained [symbolic modes](symbolic)**, such as `+x`, `ug+rw`, and etc.
 - supports **mode object** to make the mode better described.
 
 ## Install
@@ -46,7 +46,7 @@ chmodSync.sync('/path/to/file.js', 'a+x')
 ### chmod(path, mode, callback): void
 ### chmodSync(path, mode): void
 
-- **path** `string | Buffer | URL` the same as vanilla [`fs.chmod`](1)
+- **path** `string | Buffer | URL` the same as vanilla [`fs.chmod`][chmod]
 - **mode** `integer | Mode | string`
 - **callback** `Function(error?)`
 
@@ -70,7 +70,7 @@ console.log(mode.group)         // undefined
 
 ### mode `integer`
 
-The same as the the second parameter of vanilla [`fs.chmod`](1).
+The same as the the second parameter of vanilla [`fs.chmod`][chmod].
 
 **PAY ATTENTION** that `mode` should be an **octal** number.
 
@@ -98,7 +98,7 @@ interface Mode {
 }
 ```
 
-For details, see [Symbolic modes](2)
+For details, see [Symbolic modes](symbolic)
 
 
 ```sh
@@ -143,5 +143,5 @@ chmodSync('path/to/file', {
 
 [MIT](LICENSE)
 
-[1]: https://nodejs.org/dist/latest/docs/api/fs.html#fs_fs_chmod_path_mode_callback
-[2]: https://en.wikipedia.org/wiki/Chmod#Symbolic_modes
+[chmod]: https://nodejs.org/dist/latest/docs/api/fs.html#fs_fs_chmod_path_mode_callback
+[symbolic]: https://en.wikipedia.org/wiki/Chmod#Symbolic_modes
