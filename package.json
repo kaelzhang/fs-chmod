@@ -1,6 +1,6 @@
 {
   "name": "fs-chmod",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A drop in replacement of fs.chmod with `+x` support ",
   "main": "src/index.js",
   "scripts": {
@@ -21,7 +21,17 @@
     "url": "git://github.com/kaelzhang/fs-chmod.git"
   },
   "keywords": [
-    "fs-chmod"
+    "fs-chmod",
+    "chmod",
+    "symbolic notations",
+    "+x",
+    "rwx",
+    "sticky",
+    "setgid",
+    "setuid",
+    "read",
+    "write",
+    "execute"
   ],
   "engines": {
     "node": ">= 6"
