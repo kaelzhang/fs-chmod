@@ -17,7 +17,7 @@
 
 A drop-in replacement of [`fs.chmod`][chmod] with `+x` support.
 
-- supports **finer-grained [symbolic modes](symbolic)**, such as `+x`, `ug+rw`, and etc.
+- supports **finer-grained [symbolic modes]**, such as `+x`, `ug+rw`, and etc.
 - supports **mode object** to make the mode better described.
 
 ## Install
@@ -98,7 +98,7 @@ interface Mode {
 }
 ```
 
-For details, see [Symbolic modes](symbolic)
+For details, see [symbolic modes]
 
 
 ```sh
@@ -144,4 +144,4 @@ chmodSync('path/to/file', {
 [MIT](LICENSE)
 
 [chmod]: https://nodejs.org/dist/latest/docs/api/fs.html#fs_fs_chmod_path_mode_callback
-[symbolic]: https://en.wikipedia.org/wiki/Chmod#Symbolic_modes
+[symbolic modes]: https://en.wikipedia.org/wiki/Chmod#Symbolic_modes
