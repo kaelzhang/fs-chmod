@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "core-util-is": "^1.0.2",
+    "has-own-prop": "^2.0.0",
     "mz": "^2.7.0",
     "stat-mode": "^0.3.0"
   }

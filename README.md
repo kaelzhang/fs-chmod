@@ -15,7 +15,7 @@
 
 # fs-chmod
 
-A drop in replacement of `fs.chmod` with `+x` support
+A drop in replacement of [`fs.chmod`](chmod) with `+x` support.
 
 ## Install
 
@@ -26,18 +26,21 @@ $ npm i fs-chmod
 ## Usage
 
 ```js
-const chmod = require('fs-chmod')
+const {
+  chmod,
+  chmodSync
+} = require('fs-chmod')
 
 chmod('/path/to/file.js', '+x').then(() => {
   console.log('done')
 })
 
-chmod.sync('/path/to/file.js', 'a+x')
+chmodSync.sync('/path/to/file.js', 'a+x')
 ```
 
 ### chmod(path, mode): Promise
 ### chmod(path, mode, callback): void
-### chmod.sync(path, mode): void
+### chmodSync(path, mode): void
 
 - **path** `string | Buffer | URL` the same as vanilla [`fs.chmod`](chmod)
 - **mode** `integer | object | string`
@@ -68,6 +71,18 @@ interface Mode {
 ```
 
 ### mode `string`
+
+```
+[references][operator][modes]
+```
+
+- Supported references: `u`, `g`, `o`, `a`
+- Supported operators: `+`, `=`, `-`
+- Supported modes:
+  - `r`, `w`, `x`
+  <!-- - `X`: special execute -->
+  - `s`: setuid/setgid
+  - `t`: sticky
 
 ## License
 
