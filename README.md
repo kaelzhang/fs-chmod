@@ -93,6 +93,31 @@ interface Mode {
 
 For details, see [Symbolic modes](symbolic)
 
+
+```sh
+# bash
+chmod ug+rst /path/to/file
+```
+
+is equivalent to
+
+```js
+chmodSync('path/to/file', 'ug+rst')
+
+// or
+chmodSync('path/to/file', {
+  owner: {
+    read: true
+  },
+  group: {
+    read: true
+  },
+  setuid: true,
+  setgid: true,
+  sticky: true
+})
+```
+
 ### mode `string`
 
 ```
