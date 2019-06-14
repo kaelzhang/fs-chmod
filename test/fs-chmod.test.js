@@ -12,16 +12,16 @@ const {
 
 const runners = [
   ['chmod', chmod],
-  // ['chmod.sync', chmodSync],
-  // ['chmod.cb', (file, mode) => new Promise((resolve, reject) => {
-  //   chmod(file, mode, err => {
-  //     if (err) {
-  //       return reject(err)
-  //     }
+  ['chmod.sync', chmodSync],
+  ['chmod.cb', (file, mode) => new Promise((resolve, reject) => {
+    chmod(file, mode, err => {
+      if (err) {
+        return reject(err)
+      }
 
-  //     resolve()
-  //   })
-  // })]
+      resolve()
+    })
+  })]
 ]
 
 let dir
@@ -42,9 +42,31 @@ const prepare = async mode => {
 const CASES = [
   [
     '777', '-x', (t, mode) => {
-      t.is(mode.user.execute, false)
+      t.is(mode.owner.execute, false)
       t.is(mode.group.execute, false)
       t.is(mode.others.execute, false)
+    }
+  ],
+  [
+    '777', 775, (t, mode) => {
+      t.is(mode.others.read, true)
+      t.is(mode.others.write, false)
+      t.is(mode.others.execute, true)
+    }
+  ],
+  [
+    '777', {
+      owner: {
+        execute: false
+      }
+    }, (t, mode) => {
+      t.is(mode.owner.execute, false)
+    }
+  ],
+  [
+    '777', 'ug+s', (t, mode) => {
+      t.is(mode.setuid, true)
+      t.is(mode.setgid, true)
     }
   ]
 ]
@@ -52,12 +74,16 @@ const CASES = [
 CASES.forEach(([initMode, mode, tester]) => {
   runners.forEach(([type, runner]) => {
     test(`${type}: ${initMode} -> ${mode}`, async t => {
-      const file = await prepare()
+      const file = await prepare(initMode)
       await runner(file, mode)
       const stat = await fs.stat(file)
       const m = new Mode(stat)
-      console.log(m)
       tester(t, m)
     })
   })
+})
+
+test('mode type error', async t => {
+  const file = await prepare(777)
+  t.throws(() => chmodSync(file, undefined), TypeError)
 })

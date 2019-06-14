@@ -50,7 +50,7 @@ const normalize = (stat, rawMode) => {
 
 const prepare = async (file, rawMode) => {
   if (isNumber(rawMode)) {
-    return rawMode
+    return parseInt(rawMode, 8)
   }
 
   const stat = await fs.stat(file)
@@ -59,7 +59,7 @@ const prepare = async (file, rawMode) => {
 
 const prepareSync = (file, rawMode) => {
   if (isNumber(rawMode)) {
-    return rawMode
+    return parseInt(rawMode, 8)
   }
 
   const stat = fs.statSync(file)
